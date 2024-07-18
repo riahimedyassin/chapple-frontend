@@ -1,0 +1,25 @@
+<main class="h-full border-4 border-main overflow-hidden">
+  <nav class="h-16 bg-deepGreen w-full flex bg-main mb-8"></nav>
+  <div class="h-full w-full relative pl-12">
+    <div class="overflow-y-scroll h-full">
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat
+        recusandae perferendis impedit rem expedita soluta magni animi dolorem
+        non delectus! Aut laudantium ipsam labore dolorum officiis tenetur eaque
+        ea hic.
+      </p>
+    </div>
+    <div
+      class="absolute bottom-32 ml-6 left-0 bg-deepGreen w-full h-16 flex gap-4 text-main"
+    >
+      <input
+        type="text"
+        placeholder="Enter your message"
+        [(ngModel)]="content"
+      />
+      <button (click)="sendMessage()">
+        <lucide-angular name="send"></lucide-angular>
+      </button>
+    </div>
+  </div>
+</main>

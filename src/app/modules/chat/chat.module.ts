@@ -8,9 +8,14 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HttpClientModule } from '@angular/common/http';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { BoxDirective } from '@common/directives/box.directive';
+import { SelectedChatComponent } from './pages/selected-chat/selected-chat.component';
+import { FormsModule } from '@angular/forms';
+import { LucideAngularModule } from 'lucide-angular';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, SelectedChatComponent, WelcomeComponent],
   imports: [
     CommonModule,
     ChatRoutingModule,
@@ -20,6 +25,9 @@ import { IconsProviderModule } from 'src/app/icons-provider.module';
     NzButtonModule,
     HttpClientModule,
     IconsProviderModule,
+    BoxDirective,
+    FormsModule,
+    LucideAngularModule,
   ],
 })
 export class ChatModule {}
