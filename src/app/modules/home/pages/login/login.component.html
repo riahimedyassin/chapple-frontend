@@ -1,1 +1,7 @@
-<main></main>
+<main class="mt-28 text-black">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <input type="email" placeholder="Email" formControlName="email" />
+    <input type="password" placeholder="Password" formControlName="password" />
+    <button type="submit">login</button>
+  </form>
+</main>

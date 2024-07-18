@@ -11,7 +11,7 @@ import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { BoxDirective } from '@common/directives/box.directive';
 import { SelectedChatComponent } from './pages/selected-chat/selected-chat.component';
 import { FormsModule } from '@angular/forms';
-import { LucideAngularModule } from 'lucide-angular';
+import { icons, LucideAngularModule } from 'lucide-angular';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
     IconsProviderModule,
     BoxDirective,
     FormsModule,
-    LucideAngularModule,
+    LucideAngularModule.pick(icons),
   ],
 })
 export class ChatModule {}

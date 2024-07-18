@@ -4,6 +4,7 @@ import { SocketService } from '@common/interfaces';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { ENV } from '../env/env.dev';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,12 @@ import { ENV } from '../env/env.dev';
 export class ChatService implements SocketService<ChatEvent> {
   private readonly socket: Socket;
   private readonly URL = ENV.CHAT;
-  constructor() {
-    this.socket = io(this.URL);
+  constructor(private readonly authService: AuthService) {
+    this.socket = io(this.URL, {
+      extraHeaders: {
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      },
+    });
   }
   connect() {
     this.socket.connect();

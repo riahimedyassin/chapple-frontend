@@ -1,3 +1,4 @@
 export enum ChatEvent {
-  MESSAGE = 'MESSAGE',
+  MESSAGE = 'message',
+  ERROR = "error"
 }

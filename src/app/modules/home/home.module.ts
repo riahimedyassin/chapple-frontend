@@ -7,9 +7,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { icons, LucideAngularModule } from 'lucide-angular';
 import { LoginComponent } from './pages/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LandingComponent, NavbarComponent, LayoutComponent, LoginComponent],
-  imports: [CommonModule, HomeRoutingModule, LucideAngularModule.pick(icons)],
+  declarations: [
+    LandingComponent,
+    NavbarComponent,
+    LayoutComponent,
+    LoginComponent,
+  ],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    LucideAngularModule.pick(icons),
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
 export class HomeModule {}

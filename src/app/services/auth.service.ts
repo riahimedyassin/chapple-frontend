@@ -10,7 +10,7 @@ export class AuthService {
   private readonly URL = ENV.HOST;
   constructor(private readonly http: HttpClient) {}
   login(email: string, password: string) {
-    return this.http.post<HttpResponse<string>>(`${this.URL}/login`, {
+    return this.http.post<HttpResponse<string>>(`${this.URL}/users/login`, {
       email,
       password,
     });
@@ -22,6 +22,6 @@ export class AuthService {
     localStorage.removeItem('token');
   }
   getToken() {
-    localStorage.getItem('token');
+    return localStorage.getItem('token');
   }
 }
