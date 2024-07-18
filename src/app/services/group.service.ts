@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ChatEvent } from '@common/enums';
 import { SocketService } from '@common/interfaces';
-import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { ENV } from '../env/env.dev';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ChatService implements SocketService<ChatEvent> {
+@Injectable()
+export class GroupService implements SocketService<ChatEvent> {
   private readonly socket: Socket;
-  private readonly URL = ENV.CHAT;
+  private readonly URL = ENV.GROUP;
   constructor() {
     this.socket = io(this.URL);
   }
-  connect() {
+  connect(): void {
     this.socket.connect();
   }
-  disconnect() {
+  disconnect(): void {
     this.socket.disconnect();
   }
-  emit(eventName: ChatEvent, data: any) {
+  emit(eventName: ChatEvent, data: any): void {
     this.socket.emit(eventName, data);
   }
   on<T>(eventName: ChatEvent): Observable<T> {
