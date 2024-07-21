@@ -33,10 +33,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.login(email, password).subscribe({
       next: ({ data }) => {
         this.authService.setToken(data);
-        this.router.navigateByUrl('/chat');
+        this.authService.getCurrent().subscribe({
+          next: (value) => {
+            this.authService.setCurrentUser(value.data);
+            console.log(value);
+            this.router.navigateByUrl('/chat');
+          },
+          error: (_) => {
+            console.log(_)
+            this.authService.clearToken();
+            this.authService.clearCurrentUser();
+          },
+        });
       },
-      error: (err) => {
-        console.log(err);
+      error: (_) => {
+        this.authService.clearToken();
+        this.authService.clearCurrentUser();
       },
     });
   }

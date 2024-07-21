@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Friend } from '@common/models';
+import { FriendService } from '@services/friend.service';
 
 @Component({
   selector: 'app-layout',
@@ -8,4 +10,10 @@ import { Component } from '@angular/core';
 export class LayoutComponent {
   isCollapsed = false;
   contacts: any = [];
+  friends: Friend[] = [];
+  constructor(private readonly friendService: FriendService) {
+    this.friendService.getAll().subscribe({
+      next: ({ data }) => (this.friends = data),
+    });
+  }
 }
