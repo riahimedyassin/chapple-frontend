@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GetFriendDto } from '@common/DTO';
 import { Friend } from '@common/models';
+import { AuthService } from '@services/auth.service';
 import { FriendService } from '@services/friend.service';
 
 @Component({
@@ -7,13 +9,19 @@ import { FriendService } from '@services/friend.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   isCollapsed = false;
   contacts: any = [];
-  friends: Friend[] = [];
-  constructor(private readonly friendService: FriendService) {
+  friends: GetFriendDto[] = [];
+  constructor(
+    private readonly friendService: FriendService,
+    private readonly authService: AuthService
+  ) {
     this.friendService.getAll().subscribe({
       next: ({ data }) => (this.friends = data),
     });
+  }
+  ngOnInit(): void {
+    console.log(this.authService.getCurrent().subscribe((data) => console.log(data)));
   }
 }

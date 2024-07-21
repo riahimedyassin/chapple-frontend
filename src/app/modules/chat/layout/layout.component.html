@@ -12,20 +12,24 @@
           </div>
         </div>
         <p class="mb-4 text-xl font-bold">Contacts :</p>
-        <div appBox *ngFor="let contact of friends" [routerLink]="contact.id">
+        <div
+          appBox
+          *ngFor="let contact of friends"
+          [routerLink]="contact.id.toString()"
+        >
           <div class="img-container">
             <img src="" alt="user picture" />
           </div>
           <div class="w-auto">
-            <h2> 
-              {{contact.sent_by.username}}
+            <h2>
+              {{ contact.friend.username }}
             </h2>
-            <p>{{ contact.sent_by.email }}</p>
+            <p>{{ contact.friend.email }}</p>
           </div>
         </div>
       </aside>
     </div>
-    <div class="col-span-9 bg-deepBlack text-white ">
+    <div class="col-span-9 bg-deepBlack text-white">
       <router-outlet></router-outlet>
     </div>
   </main>
