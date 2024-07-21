@@ -39,3 +39,35 @@ h5 {
 h6 {
   @apply text-lg;
 }
+.input {
+  input {
+    @apply px-4 py-2 rounded-lg focus:outline-none;
+  }
+}
+.action-button {
+  @apply bg-transparent border-2 border-accent text-accent rounded-lg px-4 py-2 flex items-center justify-center gap-4 hover:bg-accent hover:text-main transition-all;
+}
+.input {
+  input,
+  select {
+    @apply h-12;
+  }
+  textarea {
+    @apply h-full;
+  }
+  input,
+  textarea,
+  select {
+    @apply border-accent rounded-md w-full bg-transparent border-[1px] px-4;
+
+    &:focus {
+      @apply outline-none;
+      &::placeholder {
+        @apply top-0 transition-all text-xs;
+      }
+    }
+    &::placeholder {
+      @apply text-accent text-sm  absolute top-3;
+    }
+  }
+}

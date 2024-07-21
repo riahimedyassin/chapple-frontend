@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
   subscription: Subscription;
+  error: any;
   constructor(
     private readonly authService: AuthService,
     private readonly fb: FormBuilder,

@@ -1,7 +1,36 @@
-<main class="mt-28 text-black">
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <input type="email" placeholder="Email" formControlName="email" />
-    <input type="password" placeholder="Password" formControlName="password" />
-    <button type="submit">login</button>
+<main class="flex items-center justify-center h-[60vh]">
+  <form
+    class="w-[50vw] px-24 h-52 text-left flex flex-col items-center"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <h2 class="mb-12 text-accent">Connect</h2>
+    <div class="font-bold text-main" *ngIf="error">
+      Email ou mot de passe invalide !
+    </div>
+    <div class="flex justify-center flex-col w-full input">
+      <label>Email</label>
+      <input
+        type="email"
+        class="input-text"
+        placeholder="Saisir votre email"
+        formControlName="email"
+      />
+    </div>
+    <div class="flex justify-center flex-col w-full input">
+      <label>Mot de passe</label>
+      <input
+        type="password"
+        class="input-text"
+        placeholder="Saisir votre mot de pasde"
+        formControlName="password"
+      />
+    </div>
+    <div class="mt-8">
+      <button class="action-button" type="submit">
+        <lucide-angular name="log-in"></lucide-angular>
+        <p>Login</p>
+      </button>
+    </div>
   </form>
 </main>
