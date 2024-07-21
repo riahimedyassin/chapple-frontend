@@ -11,8 +11,8 @@ import { FriendService } from '@services/friend.service';
 })
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
-  contacts: any = [];
   friends: GetFriendDto[] = [];
+  current: any;
   constructor(
     private readonly friendService: FriendService,
     private readonly authService: AuthService
@@ -20,8 +20,13 @@ export class LayoutComponent implements OnInit {
     this.friendService.getAll().subscribe({
       next: ({ data }) => (this.friends = data),
     });
+    this.authService.getCurrent().subscribe({
+      next: (value) => (this.current = value.data),
+    });
   }
   ngOnInit(): void {
-    console.log(this.authService.getCurrent().subscribe((data) => console.log(data)));
+    console.log(
+      this.authService.getCurrent().subscribe((data) => console.log(data))
+    );
   }
 }

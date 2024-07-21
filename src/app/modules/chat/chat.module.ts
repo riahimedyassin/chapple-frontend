@@ -15,6 +15,8 @@ import { icons, LucideAngularModule } from 'lucide-angular';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AuthInterceptor } from '@common/interceptors/auth.interceptor';
 import { FriendService } from '@services/friend.service';
+import { ChatService } from '@services/chat.service';
+import { UserService } from '@services/user.service';
 
 @NgModule({
   declarations: [LayoutComponent, SelectedChatComponent, WelcomeComponent],
@@ -39,6 +41,8 @@ import { FriendService } from '@services/friend.service';
       multi: true,
     },
     FriendService,
+    ChatService,
+    UserService
   ],
 })
 export class ChatModule {}

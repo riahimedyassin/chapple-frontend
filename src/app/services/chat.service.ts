@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { ENV } from '../env/env.dev';
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse } from '@common/models';
+import { GetMessageDto } from '@common/DTO/get-message.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +15,11 @@ import { AuthService } from './auth.service';
 export class ChatService implements SocketService<ChatEvent> {
   private readonly socket: Socket;
   private readonly URL = ENV.CHAT;
-  constructor(private readonly authService: AuthService) {
+  private readonly MESSAGE_URL = `${ENV.HOST}/messages`;
+  constructor(
+    private readonly authService: AuthService,
+    private readonly http: HttpClient
+  ) {
     this.socket = io(this.URL, {
       extraHeaders: {
         Authorization: `Bearer ${this.authService.getToken()}`,
@@ -34,5 +41,10 @@ export class ChatService implements SocketService<ChatEvent> {
         subscriber.next(data);
       });
     });
+  }
+  getMessages(username: string, page: number) {
+    return this.http.get<HttpResponse<GetMessageDto[]>>(
+      `${this.MESSAGE_URL}/${username}/${page}`
+    );
   }
 }

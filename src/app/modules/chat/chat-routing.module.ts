@@ -14,7 +14,7 @@ const routes: Routes = [
         component: WelcomeComponent,
       },
       {
-        path: ':id',
+        path: ':username',
         component: SelectedChatComponent,
       },
     ],
