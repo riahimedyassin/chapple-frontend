@@ -25,8 +25,15 @@ export class SelectedChatComponent implements OnInit {
     this.chatService.on(ChatEvent.ERROR).subscribe({
       next: (value) => console.log(value),
     });
-    this.chatService.on(ChatEvent.MESSAGE).subscribe({
-      next: (value) => console.log(value),
+    this.chatService.on<{ content: string }>(ChatEvent.MESSAGE).subscribe({
+      next: (value) => {
+        this.messages.push({
+          id: this.randomID(),
+          content: value.content,
+          from: 'user',
+          sent_at: new Date(),
+        });
+      },
     });
     this;
     this.activated.paramMap.subscribe((map) => {
