@@ -1,35 +1,9 @@
-<div class="px-4 py-4 bg-accent h-[100vh]" *ngIf="current">
-  <main class="grid grid-cols-12 rounded-lg overflow-hidden">
-    <div class="col-span-3">
-      <aside>
-        <div appBox class="mb-12 border-b-[1px]">
-          <div class="img-container">
-            <img src="" alt="user picture" />
-          </div>
-          <div class="w-auto">
-            <h2>{{ current.username }}</h2>
-            <p>{{ current.email }}</p>
-          </div>
-        </div>
-        <p class="mb-4 text-xl font-bold">Contacts :</p>
-        <div
-          appBox
-          *ngFor="let contact of friends"
-          [routerLink]="contact.friend.username"
-        >
-          <div class="img-container">
-            <img src="" alt="user picture" />
-          </div>
-          <div class="w-auto">
-            <h2>
-              {{ contact.friend.username }}
-            </h2>
-            <p>{{ contact.friend.email }}</p>
-          </div>
-        </div>
-      </aside>
+<div class="px-4 py-4 bg-accent h-full" *ngIf="current">
+  <main class="grid grid-cols-12 rounded-lg overflow-hidden h-full">
+    <div class="col-span-3 h-full">
+      <app-aside [friends]="friends" [current]="current" />
     </div>
-    <div class="col-span-9 bg-deepBlack text-white">
+    <div class="col-span-9 bg-deepBlack text-white h-full">
       <router-outlet></router-outlet>
     </div>
   </main>

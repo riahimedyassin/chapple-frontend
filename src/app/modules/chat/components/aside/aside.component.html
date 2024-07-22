@@ -1,0 +1,45 @@
+<div class="flex flex-col py-8 pl-6 pr-2 w-full bg-main flex-shrink-0 h-full">
+  <div class="flex flex-row items-center justify-center h-12 w-full">
+    <div class="h-10 w-10 rounded-full mt-4">
+      <lucide-angular name="message-circle-code"></lucide-angular>
+    </div>
+    <div class="ml-2 font-bold text-2xl">Chapple</div>
+  </div>
+  <div
+    class="flex flex-col items-center bg-accent border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg text-main"
+    *ngIf="current"
+  >
+    <div class="text-sm font-semibold">
+      {{ current.username }}
+    </div>
+  </div>
+  <div class="flex flex-col mt-8">
+    <div class="flex flex-row items-center justify-between text-xs">
+      <span class="font-bold">Active Conversations</span>
+      <span
+        class="flex items-center justify-center bg-accent text-main h-4 w-4 rounded-full"
+      >
+        {{ friends.length }}
+      </span>
+    </div>
+    <div
+      class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto"
+      *ngIf="friends.length > 0"
+    >
+      <button
+        class="flex flex-row items-center hover:bg-accent/20 rounded-xl p-2"
+        *ngFor="let friend of friends"
+        [routerLink]="'/chat/' + friend.friend.username"
+      >
+        <div
+          class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+        >
+          {{ friend.friend.username[0] | uppercase }}
+        </div>
+        <div class="ml-2 text-sm font-semibold">
+          {{ friend.friend.username }}
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

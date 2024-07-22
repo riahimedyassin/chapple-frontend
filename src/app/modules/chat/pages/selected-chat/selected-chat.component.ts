@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GetMessageDto } from '@common/DTO/get-message.dto';
 import { ChatEvent } from '@common/enums';
@@ -11,6 +19,8 @@ import { UserService } from '@services/user.service';
   styleUrls: ['./selected-chat.component.scss'],
 })
 export class SelectedChatComponent implements OnInit {
+  @ViewChild('container', { static: false })
+  container: ElementRef<HTMLDivElement>;
   messages: GetMessageDto[] = [];
   page: number = 1;
   email: string;
@@ -35,7 +45,6 @@ export class SelectedChatComponent implements OnInit {
         });
       },
     });
-    this;
     this.activated.paramMap.subscribe((map) => {
       const username = map.get('username');
       this.chatService.getMessages(username, 1).subscribe({
@@ -48,9 +57,23 @@ export class SelectedChatComponent implements OnInit {
       });
     });
   }
+  ngAfterViewInit(): void {
+    this.scrollToBottom();
+  }
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      if (this.container && this.container.nativeElement) {
+        this.container.nativeElement.scrollBy({
+          top: this.container.nativeElement.scrollHeight,
+          behavior: 'smooth',
+        });
+      } else {
+        console.log('NOOOO');
+      }
+    });
+  }
   content: string;
   sendMessage() {
-    console.log(this.email);
     this.chatService.emit(ChatEvent.MESSAGE, {
       content: this.content,
       to: this.email,

@@ -21,12 +21,15 @@ export class LayoutComponent implements OnInit {
       next: ({ data }) => (this.friends = data),
     });
     this.authService.getCurrent().subscribe({
-      next: (value) => (this.current = value.data),
+      next: (value) => {
+        this.authService.setCurrentUser(value.data);
+        this.current = value.data;
+      },
+      error: (_) => {
+        this.authService.clearToken();
+        this.authService.clearCurrentUser();
+      },
     });
   }
-  ngOnInit(): void {
-    console.log(
-      this.authService.getCurrent().subscribe((data) => console.log(data))
-    );
-  }
+  ngOnInit(): void {}
 }

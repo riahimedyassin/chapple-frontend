@@ -35,6 +35,7 @@ export class AuthService {
       });
     const result = new Subject<any>();
     result.next(new HttpResponse<any>('got it', 200, this.connectedUser));
+    result.complete();
     return result.asObservable();
   }
   setCurrentUser(data: any) {

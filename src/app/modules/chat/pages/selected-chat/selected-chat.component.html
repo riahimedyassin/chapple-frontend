@@ -1,20 +1,21 @@
-<main class="h-full border-4 border-main overflow-hidden">
-  <nav class="h-16 bg-deepGreen w-full flex bg-main mb-8"></nav>
-  <div class="h-full w-full relative pl-12">
+<main class="h-full border-4 border-main">
+  <nav class="h-[10%] bg-deepGreen w-full flex bg-main"></nav>
+  <div class="h-[90%] w-full relative pl-12">
     <div
-      class="overflow-y-scroll h-[75%] space-y-4 flex flex-col pr-36 justify-end"
-      *ngIf="messages"
+      class="h-[85%] overflow-y-auto space-y-4 pr-36 mt-2"
+      *ngIf="messages.length > 0"
+      #container
     >
       <p
         *ngFor="let message of messages"
         [title]="message.sent_at | date"
-        [ngClass]="message.from == 'me' ? 'self-end' : 'self-start'"
+        [ngClass]="message.from == 'me' ? 'ml-auto ' : 'mr-auto'"
       >
         {{ message.content }}
       </p>
     </div>
     <div
-      class="absolute bottom-32 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"
+      class="absolute bottom-8 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"
     >
       <input
         type="text"

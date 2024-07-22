@@ -1,9 +1,9 @@
 aside {
-  @apply w-full h-[95vh] bg-main px-2 py-16 text-accent;
+  @apply w-full h-full bg-main px-4 py-16 text-accent ;
   .img-container {
     @apply rounded-full w-[50px] h-[50px] border-[1px] border-white;
   }
-  h2 {
+  h4 {
     @apply text-accent;
   }
 }

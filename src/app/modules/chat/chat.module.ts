@@ -17,9 +17,15 @@ import { AuthInterceptor } from '@common/interceptors/auth.interceptor';
 import { FriendService } from '@services/friend.service';
 import { ChatService } from '@services/chat.service';
 import { UserService } from '@services/user.service';
+import { AsideComponent } from './components/aside/aside.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SelectedChatComponent, WelcomeComponent],
+  declarations: [
+    LayoutComponent,
+    SelectedChatComponent,
+    WelcomeComponent,
+    AsideComponent,
+  ],
   imports: [
     CommonModule,
     ChatRoutingModule,
@@ -42,7 +48,7 @@ import { UserService } from '@services/user.service';
     },
     FriendService,
     ChatService,
-    UserService
+    UserService,
   ],
 })
 export class ChatModule {}
