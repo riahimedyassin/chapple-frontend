@@ -1,20 +1,83 @@
-<nav class="w-full fixed top-2 left-0 px-20 py-4">
-  <div
-    class="flex items-center justify-between border-gray-800 rounded-full border-4 px-24 py-4"
+<header>
+  <nav
+    class="fixed z-10 w-full bg-transparent md:absolute md:bg-transparent top-2 left-0 px-20 py-4"
   >
-    <h3 class="text-gray-800">Chapple</h3>
-    <ul class="flex items-center justify-center gap-10 col-span-10">
-      <li>Home</li>
-      <li>About us</li>
-      <li>Contact us</li>
-    </ul>
-    <a
-      class="icon-button border-2 px-12 border-gray-800 text-gray-800"
-      routerLink="https://github.com/riahimedyassin"
-      target="_blank"
+    <div
+      class="container m-auto px-2 md:px-12 lg:px-7 border-gray-800 rounded-full border-4"
     >
-      <lucide-angular name="github" size="16"></lucide-angular>
-      <p>Contribute</p>
-    </a>
-  </div>
-</nav>
+      <div
+        class="flex flex-wrap items-center justify-between py-4 gap-6 md:py-4 md:gap-0 relative"
+      >
+        <input
+          type="checkbox"
+          name="toggle_nav"
+          id="toggle_nav"
+          class="hidden peer"
+        />
+        <div class="w-full px-6 flex justify-between lg:w-max md:px-0">
+          <a href="#" aria-label="logo" class="flex space-x-2 items-center">
+            <div aria-hidden="true" class="flex space-x-1">
+              <lucide-angular name="message-circle-code"></lucide-angular>
+            </div>
+            <span class="text-2xl font-bold text-gray-900">Chapple</span>
+          </a>
+
+          <div class="flex items-center lg:hidden max-h-10">
+            <label
+              role="button"
+              for="toggle_nav"
+              aria-label="humburger"
+              class="relative p-6 -mr-6"
+            >
+              <lucide-angular name="menu"></lucide-angular>
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="hidden absolute top-full transition translate-y-1 lg:peer-checked:translate-y-0 lg:translate-y-0 left-0 lg:top-0 lg:relative peer-checked:flex w-full lg:flex lg:flex-row flex-col flex-wrap justify-end items-center gap-6 p-6 rounded-xl bg-white lg:gap-0 lg:p-0 lg:bg-transparent lg:w-7/12"
+        >
+          <div class="text-gray-600 lg:pr-4 lg:w-auto w-full lg:pt-0">
+            <ul
+              class="tracking-wide font-medium text-sm flex-col flex lg:flex-row gap-6 lg:gap-0"
+            >
+              <li *ngFor="let page of pages">
+                <a
+                  [routerLink]="page.route"
+                  class="block md:px-4 transition hover:text-gray-500"
+                >
+                  <span>
+                    {{ page.name }}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="w-full lg:pl-2 space-y-2 border-gray-200 lg:w-auto lg:space-y-0 sm:w-max lg:border-l"
+          >
+            <button
+              type="button"
+              title="Start buying"
+              class="w-full py-3 px-6 text-center rounded-full transition sm:w-max"
+            >
+              <span class="block text-gray-500 font-semibold text-sm">
+                Sign up
+              </span>
+            </button>
+            <button
+              type="button"
+              title="Start buying"
+              class="w-full py-3 px-6 text-center rounded-full transition bg-gray-700 hover:bg-gray-400 active:bg-gray-400 focus:bg-gray-600 sm:w-max"
+            >
+              <span class="block text-white font-semibold text-sm">
+                Login
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
