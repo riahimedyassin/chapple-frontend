@@ -9,7 +9,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BoxDirective } from '@common/directives/box.directive';
 import { SelectedChatComponent } from './pages/selected-chat/selected-chat.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { icons, LucideAngularModule } from 'lucide-angular';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AuthInterceptor } from '@common/interceptors/auth.interceptor';
@@ -37,6 +37,7 @@ import { AsideComponent } from './components/aside/aside.component';
     FormsModule,
     LucideAngularModule.pick(icons),
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

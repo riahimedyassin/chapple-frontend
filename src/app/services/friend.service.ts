@@ -11,4 +11,7 @@ export class FriendService {
   getAll() {
     return this.http.get<HttpResponse<GetFriendDto[]>>(this.URL);
   }
+  add(email: string) {
+    return this.http.post(this.URL, { sent_to: email });
+  }
 }
