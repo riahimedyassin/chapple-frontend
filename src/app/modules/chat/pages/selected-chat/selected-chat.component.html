@@ -1,8 +1,8 @@
-<main class="h-full border-4 border-main">
-  <nav class="h-[10%] bg-deepGreen w-full flex bg-main"></nav>
-  <div class="h-[90%] w-full relative pl-12">
+<main class="h-full border-4 border-gray-800 relative">
+  <nav class="h-20 bg-deepGreen w-full flex bg-gray-800"></nav>
+  <div class="h-[85vh] w-full pl-12">
     <div
-      class="h-[85%] overflow-y-auto space-y-4 pr-36 mt-2"
+      class="h-[85%] overflow-y-auto custom-scrollbar space-y-4 md:pr-36 mt-2 sm:pr-12"
       *ngIf="messages.length > 0"
       #container
     >
@@ -21,6 +21,7 @@
         type="text"
         placeholder="Enter your message"
         [(ngModel)]="content"
+        (keypress)="onKeyPress($event)"
       />
       <button (click)="sendMessage()">
         <lucide-angular name="send"></lucide-angular>

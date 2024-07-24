@@ -89,4 +89,9 @@ export class SelectedChatComponent implements OnInit {
   private randomID() {
     return Math.floor(Math.random() * 100);
   }
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.sendMessage();
+    }
+  }
 }
