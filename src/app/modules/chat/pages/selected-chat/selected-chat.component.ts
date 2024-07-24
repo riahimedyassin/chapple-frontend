@@ -35,16 +35,18 @@ export class SelectedChatComponent implements OnInit {
     this.chatService.on(ChatEvent.ERROR).subscribe({
       next: (value) => console.log(value),
     });
-    this.chatService.on<{ content: string }>(ChatEvent.MESSAGE).subscribe({
-      next: (value) => {
-        this.messages.push({
-          id: this.randomID(),
-          content: value.content,
-          from: 'user',
-          sent_at: new Date(),
-        });
-      },
-    });
+    this.chatService
+      .on<{ content: string; from: string }>(ChatEvent.MESSAGE)
+      .subscribe({
+        next: (value) => {
+          this.messages.push({
+            id: this.randomID(),
+            content: value.content,
+            from: value.from == 'me' ? 'me' : 'user',
+            sent_at: new Date(),
+          });
+        },
+      });
     this.activated.paramMap.subscribe((map) => {
       const username = map.get('username');
       this.chatService.getMessages(username, 1).subscribe({
@@ -77,12 +79,6 @@ export class SelectedChatComponent implements OnInit {
     this.chatService.emit(ChatEvent.MESSAGE, {
       content: this.content,
       to: this.email,
-    });
-    this.messages.push({
-      id: this.randomID(),
-      content: this.content,
-      from: 'me',
-      sent_at: new Date(),
     });
     this.content = '';
   }
