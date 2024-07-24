@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
   subscription: Subscription;
-  error: any;
+  error: boolean = false;
   constructor(
     private readonly authService: AuthService,
     private readonly fb: FormBuilder,
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     if (this.form.invalid) return;
+    this.error = false;
     const [email, password] = [
       this.form.get('email').value,
       this.form.get('email').value,
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       error: (_) => {
         this.authService.clearToken();
         this.authService.clearCurrentUser();
+        this.error = true;
       },
     });
   }

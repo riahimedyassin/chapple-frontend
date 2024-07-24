@@ -42,6 +42,6 @@ export class AuthService {
     this.connectedUser = data;
   }
   clearCurrentUser() {
-    this.clearCurrentUser = null;
+    this.connectedUser = null;
   }
 }

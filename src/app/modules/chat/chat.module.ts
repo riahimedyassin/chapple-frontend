@@ -7,7 +7,6 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { BoxDirective } from '@common/directives/box.directive';
 import { SelectedChatComponent } from './pages/selected-chat/selected-chat.component';
 import { FormsModule } from '@angular/forms';
@@ -34,7 +33,6 @@ import { AsideComponent } from './components/aside/aside.component';
     NzMenuModule,
     NzButtonModule,
     HttpClientModule,
-    IconsProviderModule,
     BoxDirective,
     FormsModule,
     LucideAngularModule.pick(icons),
