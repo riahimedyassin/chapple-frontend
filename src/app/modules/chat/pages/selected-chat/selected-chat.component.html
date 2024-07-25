@@ -6,13 +6,19 @@
       *ngIf="messages.length > 0"
       #container
     >
-      <p
-        *ngFor="let message of messages"
-        [title]="message.sent_at | date"
-        [ngClass]="message.from == 'me' ? 'ml-auto ' : 'mr-auto'"
-      >
-        {{ message.content }}
-      </p>
+      <div *ngFor="let getMessage of messages" class="space-y-2">
+        <p class="text-center text-gray-500">
+          {{ getMessage.date | date }}
+        </p>
+        <p
+          *ngFor="let message of getMessage.messages"
+          [title]="message.sent_at | date"
+          [ngClass]="message.from == 'me' ? 'ml-auto ' : 'mr-auto'"
+          class="message"
+        >
+          {{ message.content }}
+        </p>
+      </div>
     </div>
     <div
       class="absolute bottom-8 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"

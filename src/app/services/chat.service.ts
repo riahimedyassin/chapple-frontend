@@ -43,8 +43,8 @@ export class ChatService implements SocketService<ChatEvent> {
     });
   }
   getMessages(username: string, page: number) {
-    return this.http.get<HttpResponse<GetMessageDto[]>>(
-      `${this.MESSAGE_URL}/${username}/${page}`
-    );
+    return this.http.get<
+      HttpResponse<{ date: Date; messages: GetMessageDto[] }[]>
+    >(`${this.MESSAGE_URL}/${username}/${page}`);
   }
 }

@@ -21,7 +21,7 @@ import { UserService } from '@services/user.service';
 export class SelectedChatComponent implements OnInit {
   @ViewChild('container', { static: false })
   container: ElementRef<HTMLDivElement>;
-  messages: GetMessageDto[] = [];
+  messages: { date: Date; messages: GetMessageDto[] }[] = [];
   page: number = 1;
   email: string;
   current: any;
@@ -39,7 +39,7 @@ export class SelectedChatComponent implements OnInit {
       .on<{ content: string; from: string }>(ChatEvent.MESSAGE)
       .subscribe({
         next: (value) => {
-          this.messages.push({
+          this.messages[this.messages.length - 1].messages.push({
             id: this.randomID(),
             content: value.content,
             from: value.from == 'me' ? 'me' : 'user',
@@ -70,7 +70,6 @@ export class SelectedChatComponent implements OnInit {
           behavior: 'smooth',
         });
       } else {
-        console.log('NOOOO');
       }
     });
   }
