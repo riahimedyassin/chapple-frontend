@@ -4,10 +4,7 @@
     @apply w-[80%] bg-transparent  focus:outline-none;
   }
 }
-.message {
-  @apply max-w-[75%] w-fit bg-gray-800 rounded-full px-4 py-2 text-base;
-  box-shadow: rgba(81, 78, 255, 0.25) 0px 0px 50px -12px;
-}
+
 .custom-scrollbar::-webkit-scrollbar {
   @apply w-2 bg-gray-800;
 }
@@ -18,4 +15,16 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-gray-800 rounded-full;
+}
+.message-container {
+  .message {
+    @apply max-w-[75%] w-fit bg-gray-800 rounded-lg px-4 py-2 text-base;
+    box-shadow: rgba(81, 78, 255, 0.25) 0px 0px 50px -12px;
+  }
+  button {
+    @apply invisible transition-all;
+  }
+  &:hover button {
+    @apply visible;
+  }
 }

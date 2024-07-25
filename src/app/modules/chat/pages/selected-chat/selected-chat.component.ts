@@ -12,6 +12,7 @@ import { GetMessageDto } from '@common/DTO/get-message.dto';
 import { ChatEvent } from '@common/enums';
 import { ChatService } from '@services/chat.service';
 import { UserService } from '@services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-selected-chat',
@@ -25,6 +26,8 @@ export class SelectedChatComponent implements OnInit {
   page: number = 1;
   email: string;
   current: any;
+  loaded: boolean = false;
+  targetUsername: string;
   constructor(
     private readonly chatService: ChatService,
     private readonly activated: ActivatedRoute,
@@ -49,9 +52,12 @@ export class SelectedChatComponent implements OnInit {
       });
     this.activated.paramMap.subscribe((map) => {
       const username = map.get('username');
-      this.chatService.getMessages(username, 1).subscribe({
+      this.targetUsername = username;
+      this.getMessages(username).subscribe({
         next: ({ data }) => {
           this.messages = data;
+          this.scrollToBottom();
+          this.loaded = true;
           this.userService.getEmail(username).subscribe({
             next: ({ data }) => (this.email = data.email),
           });
@@ -59,17 +65,33 @@ export class SelectedChatComponent implements OnInit {
       });
     });
   }
-  ngAfterViewInit(): void {
-    this.scrollToBottom();
+  trackScroll() {
+    const currentHeight = this.container.nativeElement.scrollTop;
+    if (currentHeight == 0 && this.loaded) {
+      this.loaded = false;
+      this.page++;
+      this.getMessages(this.targetUsername).subscribe({
+        next: ({ data }) => {
+          this.messages = data;
+          this.loaded = true;
+          this.container.nativeElement.scrollBy({
+            top: 10,
+            behavior: 'smooth',
+          });
+        },
+      });
+    }
+  }
+  private getMessages(username: string) {
+    return this.chatService.getMessages(username, this.page);
   }
   private scrollToBottom(): void {
     setTimeout(() => {
       if (this.container && this.container.nativeElement) {
         this.container.nativeElement.scrollBy({
           top: this.container.nativeElement.scrollHeight,
-          behavior: 'smooth',
+          behavior: 'auto',
         });
-      } else {
       }
     });
   }
@@ -88,5 +110,23 @@ export class SelectedChatComponent implements OnInit {
     if (event.key === 'Enter') {
       this.sendMessage();
     }
+  }
+  deleteMessage(date: Date, id: number) {
+    this.chatService.deleteMessage(id).subscribe({
+      next: (_) => {
+        let index = 0;
+        while (index++ < this.messages.length) {
+          if (
+            new Date(this.messages[index].date).getTime() ===
+            new Date(date).getTime()
+          ) {
+            this.messages[index].messages = this.messages[
+              index
+            ].messages.filter((message) => message.id != id);
+            return;
+          }
+        }
+      },
+    });
   }
 }

@@ -5,20 +5,29 @@
       class="h-[85%] overflow-y-auto custom-scrollbar space-y-4 md:pr-36 mt-2 sm:pr-12"
       *ngIf="messages.length > 0"
       #container
+      (scroll)="trackScroll()"
     >
-      <div *ngFor="let getMessage of messages" class="space-y-2">
+      <ng-container *ngFor="let getMessage of messages">
         <p class="text-center text-gray-500">
           {{ getMessage.date | date }}
         </p>
-        <p
+        <div
+          class="gap-2 flex items-center w-full justify-start message-container"
           *ngFor="let message of getMessage.messages"
-          [title]="message.sent_at | date"
-          [ngClass]="message.from == 'me' ? 'ml-auto ' : 'mr-auto'"
-          class="message"
+          [ngClass]="message.from == 'me' ? 'flex-row-reverse' : ''"
         >
-          {{ message.content }}
-        </p>
-      </div>
+          <p [title]="message.sent_at | date" class="message">
+            {{ message.content }}
+          </p>
+          <button (click)="deleteMessage(getMessage.date, message.id)">
+            <lucide-angular
+              name="trash"
+              class="text-gray-300 hover:text-red-400"
+              size="20"
+            ></lucide-angular>
+          </button>
+        </div>
+      </ng-container>
     </div>
     <div
       class="absolute bottom-8 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"
@@ -28,6 +37,7 @@
         placeholder="Enter your message"
         [(ngModel)]="content"
         (keypress)="onKeyPress($event)"
+        class="flex-grow"
       />
       <button (click)="sendMessage()">
         <lucide-angular name="send"></lucide-angular>

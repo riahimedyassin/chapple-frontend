@@ -47,4 +47,7 @@ export class ChatService implements SocketService<ChatEvent> {
       HttpResponse<{ date: Date; messages: GetMessageDto[] }[]>
     >(`${this.MESSAGE_URL}/${username}/${page}`);
   }
+  deleteMessage(id: number) {
+    return this.http.delete<void>(`${this.MESSAGE_URL}/${id}`);
+  }
 }
