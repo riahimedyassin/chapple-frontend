@@ -17,6 +17,8 @@ import { FriendService } from '@services/friend.service';
 import { ChatService } from '@services/chat.service';
 import { UserService } from '@services/user.service';
 import { AsideComponent } from './components/aside/aside.component';
+import { SelectedGroupComponent } from './pages/selected-group/selected-group.component';
+import { GroupService } from '@services/group.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { AsideComponent } from './components/aside/aside.component';
     SelectedChatComponent,
     WelcomeComponent,
     AsideComponent,
+    SelectedGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import { AsideComponent } from './components/aside/aside.component';
     FriendService,
     ChatService,
     UserService,
+    GroupService,
   ],
 })
 export class ChatModule {}

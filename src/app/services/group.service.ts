@@ -4,13 +4,23 @@ import { SocketService } from '@common/interfaces';
 import { io, Socket } from 'socket.io-client';
 import { ENV } from '../env/env.dev';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpResponse, MessageGroup } from '@common/models';
 
 @Injectable()
 export class GroupService implements SocketService<ChatEvent> {
   private readonly socket: Socket;
   private readonly URL = ENV.GROUP;
-  constructor() {
-    this.socket = io(this.URL);
+  constructor(
+    private readonly authService: AuthService,
+    private readonly http: HttpClient
+  ) {
+    this.socket = io(this.URL, {
+      extraHeaders: {
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      },
+    });
   }
   connect(): void {
     this.socket.connect();
@@ -27,5 +37,10 @@ export class GroupService implements SocketService<ChatEvent> {
         subscriber.next(data);
       });
     });
+  }
+  getMessages(groupID: number) {
+    return this.http.get<HttpResponse<MessageGroup[]>>(
+      `${ENV.HOST}/groups/message/${groupID}`
+    );
   }
 }

@@ -27,16 +27,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
   getCurrent() {
-    if (!this.connectedUser)
-      return this.http.get<HttpResponse<any>>(`${this.URL}/users/me`, {
-        headers: {
-          Authorization: `Bearer ${this.getToken()}`,
-        },
-      });
-    const result = new Subject<any>();
-    result.next(new HttpResponse<any>('got it', 200, this.connectedUser));
-    result.complete();
-    return result.asObservable();
+    // console.log(this.connectedUser)
+    // if (!this.connectedUser)
+    return this.http.get<HttpResponse<any>>(`${this.URL}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    });
+    // const result = new Subject<any>();
+    // result.next(new HttpResponse<any>('got it', 200, this.connectedUser));
+    // result.complete();
+    // return result.asObservable();
   }
   setCurrentUser(data: any) {
     this.connectedUser = data;
