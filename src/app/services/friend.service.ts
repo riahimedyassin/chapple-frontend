@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENV } from '../env/env.dev';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '@common/models';
-import { GetFriendDto } from '@common/DTO';
+import { GetFriendDto, GetFriendRequestDto } from '@common/DTO';
 
 @Injectable()
 export class FriendService {
@@ -13,5 +13,13 @@ export class FriendService {
   }
   add(email: string) {
     return this.http.post(this.URL, { sent_to: email });
+  }
+  getAllRequests() {
+    return this.http.get<HttpResponse<GetFriendRequestDto[]>>(
+      `${this.URL}/requests`
+    );
+  }
+  getAllRequestsCount() {
+    return this.http.get<HttpResponse<number>>(`${this.URL}/requests/count`);
   }
 }

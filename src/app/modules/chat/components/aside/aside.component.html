@@ -16,19 +16,27 @@
     </div>
   </div>
   <button
-    class="h-4 w-full border border-gray-500 mt-4 flex items-center gap-6 rounded-md px-4 py-4 transition-all duration-300 text-gray-500 hover:text-white hover:border-white"
+    class="h-4 w-full border border-gray-500 mt-4 flex items-center justify-between rounded-md px-4 py-4 transition-all duration-300 text-gray-500 hover:text-white hover:border-white"
     (click)="toggleAddFriend()"
     [ngClass]="addFriend ? 'border-dashed text-white border-white' : ''"
   >
-    <lucide-angular
-      name="plus"
-      size="16"
-      [ngClass]="addFriend ? 'rotate-45' : 'rotate-0'"
-      class="transition-all"
-    ></lucide-angular>
-    <p>
-      {{ addFriendButtonMessage() }}
-    </p>
+    <div class="flex items-center gap-6">
+      <lucide-angular
+        name="plus"
+        size="16"
+        [ngClass]="addFriend ? 'rotate-45' : 'rotate-0'"
+        class="transition-all"
+      ></lucide-angular>
+      <p class="">
+        {{ addFriendButtonMessage() }}
+      </p>
+    </div>
+    <div
+      class="bg-red-400 rounded-full px-2 text-xs text-white"
+      *ngIf="requests.count != 0"
+    >
+      {{ requests.count }}
+    </div>
   </button>
   <div class="flex flex-col mt-8" *ngIf="!addFriend">
     <div class="flex flex-row items-center justify-between text-xs">
@@ -91,5 +99,30 @@
         </p>
       </div>
     </form>
+    <hr class="m-4 opacity-50" />
+    <div>
+      <p class="text-sm text-white">Friend requests</p>
+      <div *ngFor="let request of requests.list">
+        <button
+          class="flex flex-row items-center hover:bg-accent/20 rounded-xl p-2 transition-colors duration-200"
+        >
+          <div
+            class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+          >
+            {{ request.sent_to.username | uppercase }}
+          </div>
+          <div class="ml-2 text-xs font-semibold">
+            {{ request.sent_to.email }}
+          </div>
+        </button>
+      </div>
+      <div
+        class="text-gray-400 w-full flex items-center justify-center gap-4 mt-8"
+        *ngIf="requests.list.length === 0"
+      >
+        <lucide-angular name="smile" size="20"></lucide-angular>
+        <p>You are so lonely</p>
+      </div>
+    </div>
   </div>
 </div>

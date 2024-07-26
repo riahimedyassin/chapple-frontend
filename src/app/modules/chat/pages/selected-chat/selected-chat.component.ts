@@ -31,7 +31,7 @@ export class SelectedChatComponent implements OnInit {
   constructor(
     private readonly chatService: ChatService,
     private readonly activated: ActivatedRoute,
-    private readonly userService: UserService
+    private readonly userService: UserService,
   ) {}
   ngOnInit(): void {
     this.chatService.connect();
