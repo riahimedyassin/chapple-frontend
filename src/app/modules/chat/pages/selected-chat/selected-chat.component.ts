@@ -102,6 +102,7 @@ export class SelectedChatComponent implements OnInit {
   }
   content: string;
   sendMessage() {
+    if (!this.content) return;
     this.chatService.emit(ChatEvent.MESSAGE, {
       content: this.content,
       to: this.email,

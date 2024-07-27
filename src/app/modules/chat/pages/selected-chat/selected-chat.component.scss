@@ -18,7 +18,7 @@
 }
 .message-container {
   .message {
-    @apply max-w-[75%] w-fit bg-gray-800 rounded-lg px-4 py-2 text-base;
+    @apply max-w-[75%] w-fit from-gray-800 to-gray-900 bg-gradient-to-b rounded-lg px-4 py-2 text-base;
     box-shadow: rgba(81, 78, 255, 0.25) 0px 0px 50px -12px;
   }
   button {

@@ -66,6 +66,7 @@ export class SelectedGroupComponent implements OnInit {
     }
   }
   sendMessage() {
+    if (!this.content) return;
     this.groupService.emit(ChatEvent.MESSAGE, {
       content: this.content,
       to: this.groupID,

@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col py-8 pl-6 pr-2 w-full bg-gray-800 flex-shrink-0 h-full text-accent"
+  class="flex flex-col py-8 pl-6 pr-2 w-full from-gray-800 to-gray-900 bg-gradient-to-tr flex-shrink-0 h-full text-accent"
 >
   <div class="flex flex-row items-center justify-center h-12 w-full">
     <div class="h-10 w-10 rounded-full mt-4">
@@ -18,7 +18,7 @@
   <button
     class="h-4 w-full border border-gray-500 mt-4 flex items-center justify-between rounded-md px-4 py-4 transition-all duration-300 text-gray-500 hover:text-white hover:border-white"
     (click)="toggleAddFriend()"
-    [ngClass]="addFriend ? 'border-dashed text-white border-white' : ''"
+    [ngClass]="addFriend ? 'border-dashed text-red-200 border-red-200' : ''"
   >
     <div class="flex items-center gap-6">
       <lucide-angular

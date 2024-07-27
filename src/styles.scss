@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600&display=swap");
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+
+  .rotate-y-40 {
+    transform: rotateY(0deg);
+  }
+
+  .rotate-x-10 {
+    transform: rotateX(50deg);
+  }
+}
 
 .icon-button {
   @apply flex gap-4 rounded-lg items-center px-4 py-2 transition-all;

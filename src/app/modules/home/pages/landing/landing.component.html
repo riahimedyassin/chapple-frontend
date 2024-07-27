@@ -1,26 +1,37 @@
 <div>
-  <img
-    class="absolute w-full object-cover object-left-top h-screen inset-0 top-0 hidden dark:block"
-    src="assets/bg.svg"
-    alt="image"
-  />
-  <div class="relative container m-auto px-6 md:px-12 lg:px-7">
+  <div class="relative container m-auto px-6 md:px-12 lg:px-7 overflow-hidden z-10">
     <div
-      class="py-40 lg:py-56 md:w-9/12 lg:w-7/12 dark:lg:w-6/12 m-auto text-center"
+      class="py-40 lg:py-56 md:w-9/12 lg:w-7/12 dark:lg:w-6/12 m-auto text-center relative"
     >
+      <div
+        class="perspective-1000 w-full h-full absolute inset-0 flex items-center justify-center opacity-5 -z-[1] "
+      >
+        <div class="transform-3d rotate-y-40 rotate-x-10">
+          <img
+            class="w-full h-full object-contain center"
+            src="assets/ooorganize.svg"
+            alt="image"
+          />
+        </div>
+      </div>
       <h1
-        class="text-gray-700 font-bold text-4xl md:text-6xl lg:text-4xl xl:text-6xl"
+        class="text-gray-300 font-bold text-4xl md:text-6xl lg:text-4xl xl:text-6xl"
       >
         Just start talking and
-        <span class="text-black"> making friends.</span>
+        <span class="text-white"> making friends</span>
+        <lucide-angular
+          name="sparkles"
+          class="inline ml-2"
+          size="40"
+        ></lucide-angular>
       </h1>
-      <p class="mt-8 text-gray-400">
+      <p class="mt-8 text-gray-500">
         Safe free group friends chat for friends and to make friends.
       </p>
       <div class="mt-16 space-y-2 lg:space-y-0 sm:space-x-6">
         <button
           type="button"
-          class="w-full py-3 px-6 text-center rounded-full transition bg-gray-700 hover:bg-gray-600 sm:w-max"
+          class="w-full py-3 px-6 text-center rounded-full transition bg-gray-800 hover:bg-gray-900 sm:w-max border-gray-800 border hover:border-gray-700"
         >
           <span class="block text-white font-semibold text-sm">
             Get started
@@ -28,11 +39,9 @@
         </button>
         <button
           type="button"
-          class="w-full py-3 px-6 text-center rounded-full transition border sm:w-max border-gray-400 hover:bg-gray-100"
+          class="w-full py-3 px-6 text-center rounded-full transition border duration-300 sm:w-max text-gray-400 border-gray-400 hover:text-white hover:bg-gray-500"
         >
-          <span class="block text-gray-400 font-semibold text-sm">
-            Sign up
-          </span>
+          <span class="block font-semibold text-sm"> Sign up </span>
         </button>
       </div>
     </div>
