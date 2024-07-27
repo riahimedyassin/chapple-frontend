@@ -22,4 +22,9 @@ export class FriendService {
   getAllRequestsCount() {
     return this.http.get<HttpResponse<number>>(`${this.URL}/requests/count`);
   }
+  respond(id: number, response: boolean) {
+    return this.http.patch<void>(`${this.URL}/respond/${id}`, {
+      accepted: response,
+    });
+  }
 }

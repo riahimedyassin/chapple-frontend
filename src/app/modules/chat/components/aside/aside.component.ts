@@ -64,4 +64,21 @@ export class AsideComponent implements OnInit {
       },
     });
   }
+  respondRequest(request: GetFriendRequestDto, respond: boolean) {
+    this.friendService.respond(request.id, respond).subscribe({
+      next: (_) => {
+        if (respond) {
+          this.friends.push({
+            friend: request.sent_by,
+            sent_at: request.sent_at,
+            id: request.id,
+          });
+        }
+        this.requests.count--;
+        this.requests.list = this.requests.list.filter(
+          (req) => req.id != request.id
+        );
+      },
+    });
+  }
 }

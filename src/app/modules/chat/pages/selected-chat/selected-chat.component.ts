@@ -22,7 +22,12 @@ import { Observable } from 'rxjs';
 export class SelectedChatComponent implements OnInit {
   @ViewChild('container', { static: false })
   container: ElementRef<HTMLDivElement>;
-  messages: { date: Date; messages: GetMessageDto[] }[] = [];
+  messages: { date: Date; messages: GetMessageDto[] }[] = [
+    {
+      date: new Date(),
+      messages: [],
+    },
+  ];
   page: number = 1;
   email: string;
   current: any;
@@ -31,7 +36,7 @@ export class SelectedChatComponent implements OnInit {
   constructor(
     private readonly chatService: ChatService,
     private readonly activated: ActivatedRoute,
-    private readonly userService: UserService,
+    private readonly userService: UserService
   ) {}
   ngOnInit(): void {
     this.chatService.connect();

@@ -102,19 +102,36 @@
     <hr class="m-4 opacity-50" />
     <div>
       <p class="text-sm text-white">Friend requests</p>
-      <div *ngFor="let request of requests.list">
+      <div *ngFor="let request of requests.list" class="w-full mt-2">
         <button
-          class="flex flex-row items-center hover:bg-accent/20 rounded-xl p-2 transition-colors duration-200"
+          class="flex w-full items-center justify-between hover:bg-accent/20 rounded-xl p-2 transition-colors duration-200"
         >
-          <div
-            class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
-          >
-            {{ request.sent_to.username | uppercase }}
+          <div class="flex items-center">
+            <div
+              class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+            >
+              {{ request.sent_by.username[0] | uppercase }}
+            </div>
+            <div class="ml-4 text-xs font-semibold">
+              {{ request.sent_by.email }}
+            </div>
           </div>
-          <div class="ml-2 text-xs font-semibold">
-            {{ request.sent_to.email }}
+          <div class="flex items-center justify-center gap-2">
+            <button
+              class="hover:bg-green-300 rounded-md transition-colors p-1"
+              (click)="respondRequest(request, true)"
+            >
+              <lucide-angular name="check" size="20"></lucide-angular>
+            </button>
+            <button
+              class="hover:bg-red-300 rounded-md transition-colors p-1"
+              (click)="respondRequest(request, false)"
+            >
+              <lucide-angular name="x" size="20"></lucide-angular>
+            </button>
           </div>
         </button>
+        <hr class="mx-8 mt-1 opacity-30" />
       </div>
       <div
         class="text-gray-400 w-full flex items-center justify-center gap-4 mt-8"
