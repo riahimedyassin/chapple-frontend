@@ -25,6 +25,11 @@ export class SelectedGroupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.groupService.connect();
+    this.authService.getCurrent().subscribe({
+      next: (value) => {
+        this.current = value.data;
+      },
+    });
     this.activated.paramMap.subscribe((map) => {
       this.groupID = +map.get('id');
       this.groupService.emit(ChatEvent.JOIN_GROUP, { group: this.groupID });
@@ -35,6 +40,7 @@ export class SelectedGroupComponent implements OnInit {
             content: value.content,
             from: value.from == this.current.email ? 'me' : value.from,
           });
+          console.log(value);
         },
       });
       this.groupService.on(ChatEvent.ERROR).subscribe({
@@ -45,11 +51,6 @@ export class SelectedGroupComponent implements OnInit {
           this.messages = data;
         },
       });
-    });
-    this.authService.getCurrent().subscribe({
-      next: (value) => {
-        this.current = value.data;
-      },
     });
   }
   onKeyPress(event: KeyboardEvent) {

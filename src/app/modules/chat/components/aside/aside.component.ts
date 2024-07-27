@@ -5,6 +5,8 @@ import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FriendService } from '@services/friend.service';
 import { FriendRequest } from '@common/models';
+import { GetGroupDto } from '@common/DTO/get-group.dto';
+import { GroupService } from '@services/group.service';
 
 @Component({
   selector: 'app-aside',
@@ -16,6 +18,7 @@ export class AsideComponent implements OnInit {
   @Input() friends: GetFriendDto[] = [];
   addFriend: boolean = false;
   form: FormGroup;
+  groups: GetGroupDto[];
   status: 'added' | 'error' | 'pending' = 'pending';
   requests: { count: number; list: GetFriendRequestDto[] } = {
     count: 0,
@@ -23,7 +26,8 @@ export class AsideComponent implements OnInit {
   };
   constructor(
     private readonly fb: FormBuilder,
-    private readonly friendService: FriendService
+    private readonly friendService: FriendService,
+    private readonly groupService: GroupService
   ) {}
   toggleAddFriend() {
     this.addFriend = !this.addFriend;
@@ -40,6 +44,11 @@ export class AsideComponent implements OnInit {
     this.friendService.getAllRequestsCount().subscribe({
       next: ({ data }) => {
         this.requests.count = data;
+      },
+    });
+    this.groupService.getAllGroups().subscribe({
+      next: ({ data }) => {
+        this.groups = data;
       },
     });
   }

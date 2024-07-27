@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse, MessageGroup } from '@common/models';
+import { GetGroupDto } from '@common/DTO/get-group.dto';
 
 @Injectable()
 export class GroupService implements SocketService<ChatEvent> {
@@ -42,5 +43,8 @@ export class GroupService implements SocketService<ChatEvent> {
     return this.http.get<HttpResponse<MessageGroup[]>>(
       `${ENV.HOST}/groups/message/${groupID}`
     );
+  }
+  getAllGroups() {
+    return this.http.get<HttpResponse<GetGroupDto[]>>(`${ENV.HOST}/groups`);
   }
 }

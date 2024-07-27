@@ -38,7 +38,7 @@
       {{ requests.count }}
     </div>
   </button>
-  <div class="flex flex-col mt-8" *ngIf="!addFriend">
+  <div class="mt-8" *ngIf="!addFriend">
     <div class="flex flex-row items-center justify-between text-xs">
       <span class="font-bold">Active Conversations</span>
       <span
@@ -48,7 +48,7 @@
       </span>
     </div>
     <div
-      class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto"
+      class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto custom-scrollbar"
       *ngIf="friends.length > 0"
     >
       <button
@@ -63,6 +63,27 @@
         </div>
         <div class="ml-2 text-sm font-semibold">
           {{ friend.friend.username }}
+        </div>
+      </button>
+    </div>
+    <hr class="mx-4 my-2 opacity-20" />
+    <div class="font-bold text-xs mt-4">Active Groups</div>
+    <div
+      class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto custom-scrollbar"
+      *ngIf="friends.length > 0"
+    >
+      <button
+        class="flex flex-row items-center hover:bg-accent/20 rounded-xl p-2 transition-colors duration-200"
+        *ngFor="let group of groups"
+        [routerLink]="'/chat/group/' + group.id"
+      >
+        <div
+          class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+        >
+          {{ group.name[0] | uppercase }}
+        </div>
+        <div class="ml-2 text-sm font-semibold">
+          {{ group.name }}
         </div>
       </button>
     </div>
