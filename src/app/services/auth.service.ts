@@ -17,6 +17,9 @@ export class AuthService {
       password,
     });
   }
+  register(payload: { email: string; password: string; username: string }) {
+    return this.http.post<void>(`${this.URL}/users/register`, payload);
+  }
   setToken(token: string) {
     localStorage.setItem('token', token);
   }

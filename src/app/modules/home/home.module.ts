@@ -9,6 +9,7 @@ import { icons, LucideAngularModule } from 'lucide-angular';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/landing/sections/about/about.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AboutComponent } from './pages/landing/sections/about/about.component';
     LayoutComponent,
     LoginComponent,
     AboutComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
