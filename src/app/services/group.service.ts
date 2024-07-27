@@ -29,10 +29,13 @@ export class GroupService implements SocketService<ChatEvent> {
   disconnect(): void {
     this.socket.disconnect();
   }
+  leaveGroup(id: number) {
+    this.socket.off(`group:${id}:message`);
+  }
   emit(eventName: ChatEvent, data: any): void {
     this.socket.emit(eventName, data);
   }
-  on<T>(eventName: ChatEvent): Observable<T> {
+  on<T>(eventName: ChatEvent | string): Observable<T> {
     return new Observable((subscriber) => {
       this.socket.on(eventName, (data: T) => {
         subscriber.next(data);

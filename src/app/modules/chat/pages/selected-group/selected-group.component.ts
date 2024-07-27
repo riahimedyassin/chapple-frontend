@@ -15,6 +15,7 @@ export class SelectedGroupComponent implements OnInit {
   content: string;
   messages: MessageGroup[] = [];
   current: any;
+  isFirstTime: boolean = true;
   constructor(
     private readonly groupService: GroupService,
     private readonly activated: ActivatedRoute,
@@ -31,18 +32,24 @@ export class SelectedGroupComponent implements OnInit {
       },
     });
     this.activated.paramMap.subscribe((map) => {
+      if (!this.isFirstTime) {
+        this.groupService.emit(ChatEvent.LEAVE_GROUP, { group: this.groupID });
+        this.groupService.leaveGroup(this.groupID);
+      }
       this.groupID = +map.get('id');
       this.groupService.emit(ChatEvent.JOIN_GROUP, { group: this.groupID });
-      this.groupService.on<MessageGroup>(ChatEvent.MESSAGE).subscribe({
-        next: (value) => {
-          this.messages.push({
-            id: this.randomID(),
-            content: value.content,
-            from: value.from == this.current.email ? 'me' : value.from,
-          });
-          console.log(value);
-        },
-      });
+      this.isFirstTime = false;
+      this.groupService
+        .on<MessageGroup>(`group:${this.groupID}:message`)
+        .subscribe({
+          next: (value) => {
+            this.messages.push({
+              id: this.randomID(),
+              content: value.content,
+              from: value.from == this.current.email ? 'me' : value.from,
+            });
+          },
+        });
       this.groupService.on(ChatEvent.ERROR).subscribe({
         next: (value) => console.log(value),
       });
