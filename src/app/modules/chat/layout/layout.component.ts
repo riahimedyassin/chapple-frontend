@@ -13,13 +13,7 @@ export class LayoutComponent implements OnInit {
   isCollapsed = false;
   friends: GetFriendDto[] = [];
   current: any;
-  constructor(
-    private readonly friendService: FriendService,
-    private readonly authService: AuthService
-  ) {
-    this.friendService.getAll().subscribe({
-      next: ({ data }) => (this.friends = data),
-    });
+  constructor(private readonly authService: AuthService) {
     this.authService.getCurrent().subscribe({
       next: (value) => {
         this.authService.setCurrentUser(value.data);

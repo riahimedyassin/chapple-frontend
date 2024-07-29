@@ -19,6 +19,9 @@ import { UserService } from '@services/user.service';
 import { AsideComponent } from './components/aside/aside.component';
 import { SelectedGroupComponent } from './pages/selected-group/selected-group.component';
 import { GroupService } from '@services/group.service';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { GroupComponent } from './components/aside/group/group.component';
+import { FriendComponent } from './components/aside/friend/friend.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { GroupService } from '@services/group.service';
     WelcomeComponent,
     AsideComponent,
     SelectedGroupComponent,
+    GroupComponent,
+    FriendComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,7 @@ import { GroupService } from '@services/group.service';
     LucideAngularModule.pick(icons),
     HttpClientModule,
     ReactiveFormsModule,
+    NzModalModule,
   ],
   providers: [
     {

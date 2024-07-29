@@ -53,4 +53,10 @@ export class GroupService implements SocketService<ChatEvent> {
   getOne(id: number) {
     return this.http.get<HttpResponse<GetGroupDto>>(`${ENV.HOST}/groups/${id}`);
   }
+  create(name: string, users: string[]) {
+    return this.http.post<HttpResponse<any>>(`${this.URL}/groups`, {
+      name,
+      users,
+    });
+  }
 }

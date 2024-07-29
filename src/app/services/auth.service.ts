@@ -48,4 +48,8 @@ export class AuthService {
   clearCurrentUser() {
     this.connectedUser = null;
   }
+  logout() {
+    this.clearCurrentUser();
+    this.clearToken();
+  }
 }
