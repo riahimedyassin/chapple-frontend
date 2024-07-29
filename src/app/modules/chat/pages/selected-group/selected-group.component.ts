@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GetGroupDto } from '@common/DTO/get-group.dto';
 import { ChatEvent } from '@common/enums';
 import { MessageGroup } from '@common/models';
 import { AuthService } from '@services/auth.service';
@@ -11,16 +12,29 @@ import { GroupService } from '@services/group.service';
   styleUrls: ['./selected-group.component.scss'],
 })
 export class SelectedGroupComponent implements OnInit {
+  @ViewChild('container', { static: false })
+  container: ElementRef<HTMLDivElement>;
   private groupID: number;
   content: string;
   messages: MessageGroup[] = [];
   current: any;
   isFirstTime: boolean = true;
+  currentGroup: GetGroupDto;
   constructor(
     private readonly groupService: GroupService,
     private readonly activated: ActivatedRoute,
     private readonly authService: AuthService
   ) {}
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      if (this.container && this.container.nativeElement) {
+        this.container.nativeElement.scrollBy({
+          top: this.container.nativeElement.scrollHeight,
+          behavior: 'auto',
+        });
+      }
+    });
+  }
   private randomID() {
     return Math.floor(Math.random() * 100);
   }
@@ -37,6 +51,12 @@ export class SelectedGroupComponent implements OnInit {
         this.groupService.leaveGroup(this.groupID);
       }
       this.groupID = +map.get('id');
+      this.groupService.getOne(this.groupID).subscribe({
+        next: ({ data }) => {
+          console.log(data);
+          this.currentGroup = data;
+        },
+      });
       this.groupService.emit(ChatEvent.JOIN_GROUP, { group: this.groupID });
       this.isFirstTime = false;
       this.groupService
@@ -48,6 +68,7 @@ export class SelectedGroupComponent implements OnInit {
               content: value.content,
               from: value.from == this.current.email ? 'me' : value.from,
             });
+            this.scrollToBottom();
           },
         });
       this.groupService.on(ChatEvent.ERROR).subscribe({
@@ -56,6 +77,7 @@ export class SelectedGroupComponent implements OnInit {
       this.groupService.getMessages(this.groupID).subscribe({
         next: ({ data }) => {
           this.messages = data;
+          this.scrollToBottom();
         },
       });
     });

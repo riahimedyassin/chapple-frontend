@@ -8,5 +8,5 @@ export class GetGroupDto {
   public readonly id: number;
   public readonly name: string;
   public readonly ownerEmail: string;
-  public readonly user_group: userGroup;
+  public readonly user_group: userGroup[];
 }

@@ -50,4 +50,7 @@ export class GroupService implements SocketService<ChatEvent> {
   getAllGroups() {
     return this.http.get<HttpResponse<GetGroupDto[]>>(`${ENV.HOST}/groups`);
   }
+  getOne(id: number) {
+    return this.http.get<HttpResponse<GetGroupDto>>(`${ENV.HOST}/groups/${id}`);
+  }
 }

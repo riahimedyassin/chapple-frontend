@@ -1,5 +1,17 @@
 <main class="h-full border-4 border-gray-900 relative">
-  <nav class="h-20 bg-deepGreen w-full flex bg-gray-900"></nav>
+  <nav
+    class="h-20 bg-deepGreen w-full flex bg-gray-900 items-center px-12 gap-4"
+    *ngIf="currentGroup"
+  >
+    <div
+      class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+    >
+      {{ currentGroup.name[0] | uppercase }}
+    </div>
+    <h6 class="text-white">
+      {{ currentGroup.name }}
+    </h6>
+  </nav>
   <div class="h-[85vh] w-full pl-12">
     <div
       class="h-[85%] overflow-y-auto custom-scrollbar space-y-4 md:pr-36 mt-2 sm:pr-12"
