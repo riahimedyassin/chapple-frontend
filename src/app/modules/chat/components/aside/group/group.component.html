@@ -8,6 +8,7 @@
       name="plus"
       size="16"
       class="transition-all"
+      [ngClass]="addGroup ? 'rotate-45' : 'rotate-0'"
     ></lucide-angular>
     <p class="">
       {{ addGroupMessage() }}
@@ -16,7 +17,7 @@
 </button>
 <ng-container *ngIf="!addGroup">
   <div
-    class="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto custom-scrollbar"
+    class="flex flex-col space-y-1 mt-4 -mx-2 h-[60%] overflow-y-auto custom-scrollbar"
     *ngIf="groups.length > 0"
   >
     <button
@@ -47,16 +48,30 @@
         class="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-2 text-white transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
       />
     </div>
-    <div class="m-h-[10%] overflow-y-auto">
+    <div class="m-h-[10%] overflow-y-auto space-y-2">
       <div
-        class="space-y-2 flex items-center justify-between"
+        class="flex items-center justify-between rounded-md"
         *ngFor="let user of friends"
+        [ngClass]="isAdded(user.friend.email) ? 'bg-green-50/50 ' : ''"
       >
-        <div>
+        <div class="py-2">
           {{ user.friend.username }}
         </div>
-        <button (click)="addUser(user.friend.email)" class="icon-button">
-          <lucide-angular name="plus" size="16"></lucide-angular>
+        <button
+          (click)="
+            isAdded(user.friend.email)
+              ? deleteUser(user.friend.email)
+              : addUser(user.friend.email)
+          "
+          class="icon-button"
+          type="button"
+        >
+          <lucide-angular
+            name="plus"
+            size="16"
+            class="transition-all"
+            [ngClass]="isAdded(user.friend.email) ? 'rotate-45 ' : 'rotate-0'"
+          ></lucide-angular>
         </button>
       </div>
     </div>

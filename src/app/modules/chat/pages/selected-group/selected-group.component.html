@@ -1,4 +1,4 @@
-<main class="h-full border-4 border-gray-900 relative">
+<main class="h-[96.7vh] border-4 border-gray-900 relative">
   <nav
     class="h-20 bg-deepGreen w-full flex bg-gray-900 items-center px-12 gap-4"
     *ngIf="currentGroup"
@@ -26,17 +26,10 @@
         <p class="message">
           {{ message.content }}
         </p>
-        <!-- <button (click)="deleteMessage(getMessage.date, message.id)">
-          <lucide-angular
-            name="trash"
-            class="text-gray-300 hover:text-red-400"
-            size="20"
-          ></lucide-angular>
-        </button> -->
       </div>
     </div>
     <div
-      class="absolute bottom-8 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"
+      class="absolute bottom-16 left-20 bg-deepGreen w-[80%] h-16 justify-between flex gap-4 text-main px-12"
     >
       <input
         type="text"

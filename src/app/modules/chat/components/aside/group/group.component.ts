@@ -32,11 +32,7 @@ export class GroupComponent implements OnInit {
       name: [null, [Validators.required]],
       users: [[], [Validators.required]],
     });
-    this.groupService.getAllGroups().subscribe({
-      next: ({ data }) => {
-        this.groups = data;
-      },
-    });
+    this.getAllGroups();
     this.friendService.getAll().subscribe({
       next: ({ data }) => (this.friends = data),
     });
@@ -47,13 +43,35 @@ export class GroupComponent implements OnInit {
       email,
     ]);
   }
+  private getAllGroups() {
+    this.groupService.getAllGroups().subscribe({
+      next: ({ data }) => {
+        this.groups = data;
+      },
+    });
+  }
+  deleteUser(email: string) {
+    (this.form.get('users') as FormControl<string[]>).patchValue([
+      ...(this.form.get('users') as FormControl<string[]>).value.filter(
+        (user) => user != email
+      ),
+    ]);
+    console.log('DELETED');
+  }
+  isAdded(email: string) {
+    return (this.form.get('users') as FormControl<string[]>).value.includes(
+      email
+    );
+  }
   onSubmit() {
     if (this.form.invalid) return;
     const name = this.form.get('name').value;
     const users = this.form.get('users').value;
     this.groupService.create(name, users).subscribe({
       next: (_) => {
+        this.form.reset();
         this.addGroup = false;
+        this.getAllGroups();
       },
       error: (error) => console.log(error),
     });
@@ -62,6 +80,6 @@ export class GroupComponent implements OnInit {
     this.addGroup = !this.addGroup;
   }
   addGroupMessage() {
-    return this.addGroup ? 'Cancel' : 'Add new friend';
+    return this.addGroup ? 'Cancel' : 'Add new group';
   }
 }
