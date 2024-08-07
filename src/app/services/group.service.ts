@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse, MessageGroup } from '@common/models';
 import { GetGroupDto } from '@common/DTO/get-group.dto';
+import { GetUser } from '@common/types/GetUser.type';
 
 @Injectable()
 export class GroupService implements SocketService<ChatEvent> {
@@ -58,5 +59,10 @@ export class GroupService implements SocketService<ChatEvent> {
       name,
       users,
     });
+  }
+  getGroupMembers(id: number) {
+    return this.http.get<HttpResponse<GetUser[]>>(
+      `${ENV.HOST}/groups/members/${id}`
+    );
   }
 }

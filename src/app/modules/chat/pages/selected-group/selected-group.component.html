@@ -1,16 +1,39 @@
 <main class="h-[96.7vh] border-4 border-gray-900 relative">
   <nav
-    class="h-20 bg-deepGreen w-full flex bg-gray-900 items-center px-12 gap-4"
+    class="transition-all bg-deepGreen w-full absolute top-0 left-0 bg-gray-900 items-center justify-between px-12"
     *ngIf="currentGroup"
+    [ngClass]="chatInfo ? 'h-[60%]' : 'h-20'"
   >
-    <div
-      class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
-    >
-      {{ currentGroup.name[0] | uppercase }}
+    <div class="flex items-center justify-between gap-4 m-h-20 w-full mt-4">
+      <div class="flex gap-4 items-center">
+        <div
+          class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+        >
+          {{ currentGroup.name[0] | uppercase }}
+        </div>
+        <h6 class="text-white">
+          {{ currentGroup.name }}
+        </h6>
+      </div>
+      <button class="icon-button" (click)="toggleChatInfo()">
+        <lucide-angular name="info"></lucide-angular>
+      </button>
     </div>
-    <h6 class="text-white">
-      {{ currentGroup.name }}
-    </h6>
+    <div *ngIf="chatInfo" class="col-span-2 mt-12">
+      <div
+        *ngFor="let user of chatUsers"
+        class="flex flex-row items-center hover:bg-accent/20 rounded-xl p-2 transition-colors duration-200"
+      >
+        <div
+          class="flex items-center justify-center h-8 w-8 bg-accent/20 rounded-full"
+        >
+          {{ user.username[0] | uppercase }}
+        </div>
+        <div class="ml-2 text-sm font-semibold">
+          {{ user.username }}
+        </div>
+      </div>
+    </div>
   </nav>
   <div class="h-[85vh] w-full pl-12">
     <div
