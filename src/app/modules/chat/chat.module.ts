@@ -22,6 +22,8 @@ import { GroupService } from '@services/group.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { GroupComponent } from './components/aside/group/group.component';
 import { FriendComponent } from './components/aside/friend/friend.component';
+import { StoreModule } from '@ngrx/store';
+import { ChatReducer } from './state/chat.reducer';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { FriendComponent } from './components/aside/friend/friend.component';
     HttpClientModule,
     ReactiveFormsModule,
     NzModalModule,
+    StoreModule.forFeature({ name: 'chat', reducer: ChatReducer }),
   ],
   providers: [
     {

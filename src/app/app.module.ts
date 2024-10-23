@@ -12,6 +12,9 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from '@services/auth.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { GlobalStateReducer } from './state/global.reducer';
 
 registerLocaleData(en);
 
@@ -23,6 +26,8 @@ registerLocaleData(en);
     NzButtonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(GlobalStateReducer),
+    EffectsModule.forRoot([]),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

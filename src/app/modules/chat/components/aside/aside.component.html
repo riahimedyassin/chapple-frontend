@@ -1,21 +1,21 @@
 <div
-  class="flex flex-col py-8 pl-6 pr-2 w-full from-gray-800 to-gray-900 bg-gradient-to-tr flex-shrink-0 h-full text-accent"
+  class="flex flex-col flex-shrink-0 invisible w-full h-full py-8 pl-6 pr-2 from-gray-800 to-gray-900 bg-gradient-to-tr text-accent md:visible"
 >
-  <div class="flex flex-row items-center justify-center h-12 w-full">
-    <div class="h-10 w-10 rounded-full mt-4">
+  <div class="flex flex-row items-center justify-center w-full h-12">
+    <div class="w-10 h-10 mt-4 rounded-full">
       <lucide-angular name="message-circle-code"></lucide-angular>
     </div>
-    <div class="ml-2 font-bold text-2xl">Chapple</div>
+    <div class="ml-2 text-2xl font-bold">Chapple</div>
   </div>
   <div
-    class="flex items-center border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg bg-accent text-main"
+    class="flex items-center w-full px-4 py-6 mt-4 border border-gray-200 rounded-lg bg-accent text-main"
     *ngIf="current"
   >
-    <div class="text-sm flex-grow font-semibold h-full w-full">
+    <div class="flex-grow w-full h-full text-sm font-semibold">
       {{ current.username }}
     </div>
     <div
-      class="hover:bg-red-300 rounded-lg flex items-center justify-center transition-colors"
+      class="flex items-center justify-center transition-colors rounded-lg hover:bg-red-300"
     >
       <button (click)="logout()">
         <lucide-angular name="log-out"></lucide-angular>

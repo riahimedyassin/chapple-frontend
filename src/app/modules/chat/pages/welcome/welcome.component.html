@@ -2,6 +2,6 @@
   <div class="mb-6 text-gray-500">
     <lucide-angular name="phone" size="48"></lucide-angular>
   </div>
-  <h1>Welcome In Yasisn !</h1>
+  <h1 *ngIf="current">Welcome In {{ current.username }} !</h1>
   <p class="text-header">Start your chat with your friends and familly now !</p>
 </div>

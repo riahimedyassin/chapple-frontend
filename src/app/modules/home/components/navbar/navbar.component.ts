@@ -20,9 +20,5 @@ export class NavbarComponent {
       name: 'About',
       route: 'about',
     },
-    {
-      name: 'Contribute',
-      route: 'contribute',
-    },
   ];
 }
