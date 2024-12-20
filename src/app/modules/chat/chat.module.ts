@@ -49,7 +49,7 @@ import { ChatReducer } from './state/chat.reducer';
     HttpClientModule,
     ReactiveFormsModule,
     NzModalModule,
-    StoreModule.forFeature({ name: 'chat', reducer: ChatReducer }),
+    StoreModule.forFeature('chat', ChatReducer),
   ],
   providers: [
     {

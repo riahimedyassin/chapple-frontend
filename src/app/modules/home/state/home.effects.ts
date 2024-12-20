@@ -3,15 +3,21 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '@services/auth.service';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { SetErrorMessage } from 'src/app/state/global.actions';
-import { SetConnectedUser, StartLogin } from './home.actions';
+import { SetConnectedUser, SetFriends, StartLogin } from './home.actions';
 import { Router } from '@angular/router';
+import { FriendService } from '@services/friend.service';
+import { getToken } from './home.selectors';
+import { Store } from '@ngrx/store';
+import { GetToken } from '@modules/chat/state/chat.selectors';
 
 @Injectable()
 export class HomeEffects {
   constructor(
     private readonly authService: AuthService,
     private readonly action$: Actions,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly friendService: FriendService,
+    private readonly store: Store
   ) {}
 
   startLogin$ = createEffect(() => {

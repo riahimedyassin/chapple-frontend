@@ -16,7 +16,10 @@ export class WelcomeComponent implements OnDestroy, OnInit {
   }
   ngOnInit(): void {
     this.subscription = this.authService.getCurrent().subscribe({
-      next: ({ data }) => (this.current = data),
+      next: ({ data }) => {
+        this.current = data;
+        console.log(data);
+      },
     });
   }
 }

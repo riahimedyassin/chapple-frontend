@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StartLogin } from '@modules/home/state/home.actions';
+import { SetFriends, StartLogin } from '@modules/home/state/home.actions';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@services/auth.service';
 import { Subscription } from 'rxjs';
@@ -35,17 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.form.get('password').value,
     ];
     this.store.dispatch(StartLogin({ username: email, password: password }));
-    // this.subscription = this.authService.login(email, password).subscribe({
-    //   next: ({ data }) => {
-    //     this.authService.setToken(data);
-    //     this.router.navigateByUrl('/chat/welcome');
-    //   },
-    //   error: (_) => {
-    //     this.authService.clearToken();
-    //     this.authService.clearCurrentUser();
-    //     this.error = true;
-    //   },
-    // });
+    // this.store.dispatch(SetFriends());
   }
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();

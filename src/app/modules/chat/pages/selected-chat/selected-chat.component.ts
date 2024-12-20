@@ -1,18 +1,14 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   ElementRef,
   OnInit,
-  ViewChild,
-  ViewChildren,
+  ViewChild
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GetMessageDto } from '@common/DTO/get-message.dto';
 import { ChatEvent } from '@common/enums';
 import { ChatService } from '@services/chat.service';
 import { UserService } from '@services/user.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-selected-chat',
@@ -39,6 +35,7 @@ export class SelectedChatComponent implements OnInit {
     private readonly userService: UserService
   ) {}
   ngOnInit(): void {
+    console.log("HERE")
     this.chatService.connect();
     this.chatService.on(ChatEvent.ERROR).subscribe({
       next: (value) => console.log(value),

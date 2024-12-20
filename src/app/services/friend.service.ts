@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from '@common/models';
 import { GetFriendDto, GetFriendRequestDto } from '@common/DTO';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any',
+})
 export class FriendService {
   private readonly URL = `${ENV.HOST}/friends`;
   constructor(private readonly http: HttpClient) {}
